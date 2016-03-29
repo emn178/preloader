@@ -1,7 +1,7 @@
 /**
  * [preloader]{@link https://github.com/emn178/preloader}
  *
- * @version 0.1.0
+ * @version 0.1.1
  * @author Chen, Yi-Cyuan [emn178@gmail.com]
  * @copyright Chen, Yi-Cyuan 2016
  * @license MIT
@@ -31,9 +31,12 @@
     img.src = image;
   };
 
-  Preloader.prototype.onload = function () {
+  Preloader.prototype.onload = function (e) {
     ++this.loadCount;
     this.progress();
+    var img = e.target;
+    img.onload = img.onerror = null;
+    img.removeAttribute('src');
   };
 
   Preloader.prototype.progress = function () {
